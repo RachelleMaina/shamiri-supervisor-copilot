@@ -30,7 +30,7 @@ export default async function handler(
 
     const session = sessionResult.rows[0];
 
-    // 2️⃣ Call OpenAI for analysis
+    // Call OpenAI for analysis
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       temperature: 0.1,
@@ -71,7 +71,7 @@ export default async function handler(
     3 = Adherent
     
     Compute:
-    overallQualityIndex = average of the three scores (rounded to 2 decimals).
+    overallquality_index = average of the three scores (rounded to 2 decimals).
     
     Provide brief reasoning for each metric.
     
@@ -98,13 +98,13 @@ export default async function handler(
     
     {
       "summary": string,
-      "qualityIndex": {
-        "contentCoverage": { "score": number, "reasoning": string },
-        "facilitationQuality": { "score": number, "reasoning": string },
-        "protocolSafety": { "score": number, "reasoning": string },
-        "overallQualityIndex": number
+      "quality_index": {
+        "content_coverage": { "score": number, "reasoning": string },
+        "facilitation_quality": { "score": number, "reasoning": string },
+        "protocol_safety": { "score": number, "reasoning": string },
+        "overallquality_index": number
       },
-      "riskAssessment": {
+      "risk_assessment": {
         "status": "SAFE" | "RISK",
         "quote": string | null,
         "reasoning": string
@@ -126,30 +126,43 @@ export default async function handler(
       throw new Error("OpenAI returned empty response");
     }
 
-    const ai = JSON.parse(aiRaw);
+
+    let ai;
+
+    try {
+      ai = JSON.parse(aiRaw);
+      console.log(ai)
+    } catch (parseError) {
+      console.error("Failed to parse AI response as JSON:", parseError);
+      console.log("Raw string was:", aiRaw);
+      throw new Error("Invalid JSON from OpenAI");
+    }
+
+
 
     // 3️⃣ Insert AI analysis into DB
     const analysisResult = await query(
       `INSERT INTO ai_analyses
-        (session_id, risk_score, flagged, summary, structured_feedback)
-       VALUES ($1, $2, $3, $4, $5)
+        (session_id, summary, quality_index, risk_assessment)
+       VALUES ($1, $2, $3, $4)
        RETURNING *`,
       [
-        id,
-        ai.riskScore,
-        ai.flagged,
-        ai.summary,
-        ai.structuredFeedback
+        id,   
+        ai.summary,  
+        ai.quality_index, 
+        ai.risk_assessment 
       ]
     );
+    
 
     // 4️⃣ Update session status
-    const newStatus = ai.flagged ? "FLAGGED" : "AI_PROCESSED";
+    const newStatus = 'ANALYZED';
 
     await query(
       "UPDATE sessions SET status = $1 WHERE id = $2",
       [newStatus, id]
     );
+    
 
     return res.status(200).json({
       message: "AI analysis completed successfully",
