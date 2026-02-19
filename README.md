@@ -30,34 +30,34 @@ During the development of the Shamiri Supervisor Copilot, I intentionally used A
 
 1. **System Design First**
 
-   * I carefully read the assignment requirements and sketched a full system design on paper.
-   * This included database schema planning (tables, fields, relations) and outlining backend endpoints.
-   * The design allowed me to have a clear blueprint before touching any code.
+  - I carefully read the assignment requirements and sketched a full system design on paper.
+  - This included database schema planning (tables, fields, relations) and outlining backend endpoints.
+  - The design allowed me to have a clear blueprint before touching any code.
 
 2. **Backend Implementation**
 
-   * After defining the tables, endpoints, and required tools (PostgreSQL, bcrypt, JSON Web Tokens), I used ChatGPT to **scaffold table schemas, backend routes, and seed data**.
-   * Importantly, all scaffolding was based on **my pre-defined designs**. I verified the generated code and adapted it as necessary to maintain type safety and follow the assignment’s requirements.
+  - After defining the tables, endpoints, and required tools (PostgreSQL, bcrypt, JSON Web Tokens), I used ChatGPT to **scaffold table schemas, backend routes, and seed data**.
+  - Importantly, all scaffolding was based on **my pre-defined designs**. I verified the generated code and adapted it as necessary to maintain type safety and follow the assignment’s requirements.
 
 3. **Frontend Implementation**
 
-   * I sketched UI components, layout, and interaction flows on paper before coding.
-   * I wrote most of the React/Next.js components myself, relying minimally on Copilot for repetitive snippets.
-   * ChatGPT was used selectively to scaffold API hooks, **only after I explicitly instructed what I needed**. This helped speed up integration without compromising the custom UX or functionality.
-   * Because frontend behavior is non-deterministic, AI assistance was mostly supportive rather than generative — ensuring the final components matched the planned design.
+  - I sketched UI components, layout, and interaction flows on paper before coding.
+  - I wrote most of the React/Next.js components myself, relying minimally on Copilot for repetitive snippets.
+  - ChatGPT was used selectively to scaffold API hooks, **only after I explicitly instructed what I needed**. This helped speed up integration without compromising the custom UX or functionality.
+  - Because frontend behavior is non-deterministic, AI assistance was mostly supportive rather than generative. This ensured the final components matched the planned design.
 
 
 ## Deployment
 
 The application is publicly deployed at:
 
-[Your Deployment URL Here]
+[Shamiri Supervisor Copilot Dashboard](https://shamiri-supervisor-copilot-kohl.vercel.app/)
 
 
 ## Local Development
 
 ```
-git clone <repo-url>
+git clone https://github.com/RachelleMaina/shamiri-supervisor-copilot
 cd shamiri-supervisor-copilot
 npm install
 npm run dev
@@ -68,7 +68,7 @@ Ensure you have:
 * PostgreSQL running
 * Environment variables configured:
 
-  * DATABASE_URL
-  * JWT_SECRET
-  * OPENAI_API_KEY
+ - DATABASE_URL
+ - JWT_SECRET
+ - OPENAI_API_KEY
 
