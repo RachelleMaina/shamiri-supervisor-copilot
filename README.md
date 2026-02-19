@@ -53,6 +53,12 @@ The application is publicly deployed at:
 
 [Shamiri Supervisor Copilot Dashboard](https://shamiri-supervisor-copilot-kohl.vercel.app/)
 
+```
+Email: supervisor@gmail.com
+Password:0000
+
+```
+
 
 ## Local Development
 
@@ -68,7 +74,7 @@ Ensure you have:
 * PostgreSQL running
 * Environment variables configured:
 
- - DATABASE_URL
- - JWT_SECRET
- - OPENAI_API_KEY
+ 1. DATABASE_URL
+ 2. JWT_SECRET
+ 3. OPENAI_API_KEY
 
