@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLogin } from "../hooks/useLogin";
@@ -104,23 +103,13 @@ export default function LoginPage() {
 
         <button
           type="submit"
-          disabled={loginMutation.isLoading}
+          disabled={loginMutation.isPending}
           className="w-full mt-4 rounded-md bg-primary text-white text-sm font-medium py-2.5 hover:bg-primary transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loginMutation.isLoading ? "Signing in..." : "Sign in"}
+          {loginMutation.isPending ? "Signing in..." : "Sign in"}
         </button>
 
    
-        {/* <p className="text-center text-sm text-primary">
-          Don&apos;t have an account?{" "}
-          <Link
-            href="/register"
-            className="text-primary font-medium hover:text-primary"
-          >
-            Create one
-          </Link>
-        </p> */}
-
       </form>
     </div>
   </div>
